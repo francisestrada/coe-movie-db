@@ -20,7 +20,13 @@ class MainHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('templates/main.html')
         self.response.write(template.render())
 
+class MovieViewHandler(webapp2.RequestHandler):
+    def get(self,id):
+        template_values = {"id": id}
+        template = JINJA_ENVIRONMENT.get_template('templates/view.html')
+        self.response.write(template.render(template_values))
 
 application = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/view/(.*)',MovieViewHandler),
 ], debug=True)
