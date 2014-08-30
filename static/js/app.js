@@ -56,17 +56,19 @@
     function displayMovies(data) {
         data.results.forEach(function(movie) {
             var imageSrc = config.images.base_url + config.images.poster_sizes[3] + movie.poster_path;
-            var htmlStr = [
-                            '<div class="col-md-4 portfolio-item">',
-                                '<a href="/view/'+movie.id+'">',
-                                    '<img class="img-responsive" style="height:500px;width:350px"src="' + imageSrc + '" alt="">',
-                                '</a>',
-                                '<h3><center><font face="Maiandra GD">',
-                                    '<a href="/view/'+movie.id+'" style="color:cyan">' + movie.title +'</a>',
-                                '</font></center></h3>',
-                            '</div>'
-                            ];
-            $('.movies-list').append($(htmlStr.join('')));
+             
+                         var zee = {
+                            "movie-id" : movie.id,
+                            "img" : imageSrc,
+                            "title": movie.title
+                         }
+            var raw = $('#tple-tweet').html();
+            var  template = Handlebars.compile(raw);
+            var html = template(zee);
+            $('.movies-list').append(html);
+
+                          
+            
         });
     }
  
