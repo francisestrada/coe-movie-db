@@ -56,11 +56,13 @@
     function displayMovies(data) {
         data.results.forEach(function(movie) {
             var imageSrc = config.images.base_url + config.images.poster_sizes[3] + movie.poster_path;
+            var backdrop = config.images.base_url + config.images.poster_sizes[6] + movie.backdrop_path;
              
                          var zee = {
                             "movie-id" : movie.id,
                             "img" : imageSrc,
-                            "title": movie.title
+                            "title": movie.title,
+                            "bdrop": backdrop
                          }
             var raw = $('#tple-tweet').html();
             var  template = Handlebars.compile(raw);
@@ -146,8 +148,8 @@
             var movies = response.results;
             var allMovies = "";
             for(var i=0;i<movies.length;i++){
-                allMovies += (i==movies.length-1)? '<a href="/movie/'+movies[i].id+'">'+movies[i].title+'</a>, '
-                    : '<a href="/movie/'+movies[i].id+'">'+movies[i].title+'</a>';
+                allMovies += (i==movies.length-1)? '<a href="/movie/'+movies[i].id+'>'+movies[i].title+'</a>, '
+                    : '<a href="/movie/'+movies[i].id+'style= "color: white">'+movies[i].title+'</a>';
             }
             $("#similar").html(allMovies);
         });

@@ -48,14 +48,17 @@
    	{% raw %}
    
     <script type= "text/x-handlebars-template" id = "tple-tweet">
- 	<div class="col-md-4 portfolio-item">,
+ 	<div class="col-md-6 portfolio-item">,
                                 <a href="/view/{{movie-id}}">
-                                    <img class="img-responsive" style="height:500px;width:350px"src="{{img}}" alt="">
+                                    <img class="img-responsive" style="height:250px;width:200px; position: absolute; margin-top:300px; margin-left:24"src="{{img}}" alt="">
+                                    <img class="img-responsive" style="height:550px;width:600px"src="{{bdrop}}" alt="">
                                 </a>
                                 <h3><center><font face="Maiandra GD">
-                                    <a href="/view/{{movie-id}}" style="color:cyan"> + {{title}} +</a>
+                                    <a href="/view/{{movie-id}}" style="color:white"> + {{title}} +</a>
                                 </font></center></h3>
-                            </div>
+                                   </div>
+
+
     </script> 
     {% endraw %}
 

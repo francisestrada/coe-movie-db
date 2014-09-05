@@ -14,7 +14,7 @@ html {
 }
 body {
   margin: 0;
-  background-image: url("http://static.tumblr.com/710fd6dc73445426b32fea9130d8d227/pzuujb4/51On6fncm/tumblr_static_e9ar2s5k9sg800wcc884ko84c.jpg");
+  background-image: url("http://p1.pichost.me/i/40/1639531.jpg");
 }
 .title,
 .trailer,
@@ -912,12 +912,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #3399f3;
+  color: magenta;
   text-decoration: underline;
 }
 a:focus {
