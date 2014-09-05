@@ -16,6 +16,20 @@ body {
   margin: 0;
   background-image: url("http://p1.pichost.me/i/40/1639531.jpg");
 }
+.synopsisD{
+  border-style: solid;
+  border-radius: 10%;
+}
+li{
+  text-decoration: none;
+}
+.casts{
+  margin-top: 70px;
+}
+.similar{
+  border-style : solid;
+  margin: -490px 20px 0 630px;
+}
 .title,
 .trailer,
 .overview,
@@ -900,7 +914,7 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #666666;
+  color: white;
   background-color: #ffffff;
 }
 input,

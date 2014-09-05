@@ -1,6 +1,8 @@
     var config;
     var baseUrl = 'http://api.themoviedb.org/3/';
-    var apiKey = '676e50341c60a74423a05f38e25b23c6';
+     apiKey = '676e50341c60a74423a05f38e25b23c6';
+    var api_key = '676e50341c60a74423a05f38e25b23c6';
+
  
  
     function initialize(callback) {
@@ -69,11 +71,23 @@
             var html = template(zee);
             $('.movies-list').append(html);
 
-                          
+            viewCast(movie.id);
             
         });
     }
  
+
+    function viewCast(id){
+        reqParam = {api_key:api_key};
+            url = baseUrl +  "movie/"+id+"/credits";
+            $.get(url, reqParam, function(response){
+                for(var i=0; i<4; i++){
+                    $('#'+id).append('<li>'+response.cast[i].name+'</li>');
+               }
+
+            });
+
+    }
     function loadNowShowing() {
         var nowShowingUrl = baseUrl + 'movie/now_playing';
         $('.movies-list').html('');
@@ -133,27 +147,62 @@
             $("#trailer").html(html);
         });
  
-        url = baseUrl + "movie/"+id+"/credits";
-        $.get(url,reqParam,function(response){
-            var casts = "";
-            for(var i=0;i<response.cast.length;i++){
-                casts+= (i!=response.cast.length-1)?response.cast[i].name+", "
-                    : " and "+response.cast[i].name;
-            }
-            $("#casts").html(casts);
+    url = baseUrl + "movie/"+id+"/credits";
+    $.get(url,reqParam,function(response){
+               var casts = response.cast;
+            var allCasts = "";    
+            var imageSrc = config.images.base_url + config.images.poster_sizes[3] ;                  
+            for(var i=0;i<casts.length;i++){
+                allCasts += '<div class="col-sm-3 col-xs-6">'+
+                                
+                                '<center><div id="'+casts[i].id+'">'+
+                                '<img id="movie-image" class="img-responsive portfolio-item" style="border-style:solid;border-width:5px;border-color:black; max-height: 200px;" src="'+imageSrc+casts[i].profile_path+'" alt="">'+
+                                '</center><br>'+
+
+                                '<center><h5><br>'+
+                                    '<p style="color:#fff;">' +casts[i].name+ ' <br> as <br>' +casts[i].character+ '<br></p>'+
+                                '</h5></center>'+
+
+                              '<br></div></div>';
+                              }
+            $("#casts").html(allCasts);
         });
- 
-        url = baseUrl + "movie/"+id+"/similar";
-        $.get(url,reqParam,function(response){
+
+    url = baseUrl + "movie/"+id+"/similar";
+    $.get(url,reqParam,function(response){
             var movies = response.results;
             var allMovies = "";
+            var imageSrc = config.images.base_url + config.images.poster_sizes[3];            
             for(var i=0;i<movies.length;i++){
-                allMovies += (i==movies.length-1)? '<a href="/movie/'+movies[i].id+'>'+movies[i].title+'</a>, '
-                    : '<a href="/movie/'+movies[i].id+'style= "color: white">'+movies[i].title+'</a>';
+                allMovies += '<div class="col-sm-3 col-xs-6">'+
+                                '<center><h5>'+
+                                    '<a style="color:#fff;" href="/view/'+movies[i].id+'">'+movies[i].title+'</a>'+
+                                '</h5></center><br>'+
+
+                                '<center><a href="/view/'+movies[i].id+'">'+
+                                    '<img id="movie-image" class="img-responsive portfolio-item" style="border-style:solid;border-width:5px;border-color:black; max-height: 150px;" src="'+imageSrc+movies[i].backdrop_path+'" alt="">'+
+                                '</a></center><br>'+
+                                '<br>' +
+                              '</div>';
             }
             $("#similar").html(allMovies);
         });
- 
+    url = baseUrl + "movie/"+id+"/images";
+        $.get(url,reqParam,function(response){          
+            var backdrop = response.backdrops;
+            var allBackdrops = "";    
+            var imageSrc = config.images.base_url + config.images.poster_sizes[3] ;                  
+            for(var i=0;i<backdrop.length;i++){
+                allBackdrops += '<div id="backdrops" class="col-sm-4 col-xs-4">'+
+                                '<img style="border-style:solid;border-width:3px;border-color:black; max-height: 200px;" src="'+imageSrc+backdrop[i].file_path+'" alt="">'+
+                                '</center>'+
+
+                                '<br>' +
+                              '</div></div>';
+            }
+            $("#backdrops").html(allBackdrops);
+        });
+
     });
 }
 $(document).ready(function(){
