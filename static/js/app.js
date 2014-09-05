@@ -1,6 +1,8 @@
     var config;
     var baseUrl = 'http://api.themoviedb.org/3/';
-    var apiKey = '676e50341c60a74423a05f38e25b23c6';
+     apiKey = '676e50341c60a74423a05f38e25b23c6';
+    var api_key = '676e50341c60a74423a05f38e25b23c6';
+
  
  
     function initialize(callback) {
@@ -69,11 +71,23 @@
             var html = template(zee);
             $('.movies-list').append(html);
 
-                          
+            viewCast(movie.id);
             
         });
     }
  
+
+    function viewCast(id){
+        reqParam = {api_key:api_key};
+            url = baseUrl +  "movie/"+id+"/credits";
+            $.get(url, reqParam, function(response){
+                for(var i=0; i<4; i++){
+                    $('#'+id).append('<li>'+response.cast[i].name+'</li>');
+               }
+
+            });
+
+    }
     function loadNowShowing() {
         var nowShowingUrl = baseUrl + 'movie/now_playing';
         $('.movies-list').html('');
